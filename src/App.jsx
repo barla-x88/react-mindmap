@@ -1,11 +1,11 @@
 import ReactFlow, {
   Background,
-  BackgroundVariant,
   Controls,
   MiniMap,
   addEdge,
-  applyEdgeChanges,
-  applyNodeChanges,
+  useEdgesState,
+  useNodesState,
+  useReactFlow,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import './App.css';
@@ -15,7 +15,7 @@ import Dagre from '@dagrejs/dagre';
 import { nodes as initialNodes } from './nodes';
 import { edges as initialEdges } from './edges';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
 // Use custom Node
 const nodeTypes = { customNode: CustomNode };
@@ -24,7 +24,11 @@ const nodeTypes = { customNode: CustomNode };
 const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 
 const getLayoutedElements = (nodes, edges, options) => {
-  g.setGraph({ rankdir: options.direction });
+  g.setGraph({
+    rankdir: options.direction,
+    nodesep: options.nodesep,
+    ranksep: options.ranksep,
+  });
 
   edges.forEach((edge) => g.setEdge(edge.source, edge.target));
   nodes.forEach((node) => g.setNode(node.id, node));
@@ -42,29 +46,24 @@ const getLayoutedElements = (nodes, edges, options) => {
 };
 
 function App() {
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
+  const { fitView } = useReactFlow();
+  const [nodes, setNodes, onNodeChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgeChange] = useEdgesState(initialEdges);
 
-  useEffect(() => {
-    const layouted = getLayoutedElements(nodes, edges, { direction: 'LR' });
+  const layout = useCallback(() => {
+    const layouted = getLayoutedElements(nodes, edges, {
+      direction: 'LR',
+      nodesep: 100,
+      ranksep: 200,
+    });
 
     setNodes([...layouted.nodes]);
     setEdges([...layouted.edges]);
+
+    window.requestAnimationFrame(() => {
+      fitView({ duration: 1000 });
+    });
   }, [nodes, edges]);
-
-  //handle node changes
-  const onNodeChange = useCallback(
-    (changes) =>
-      setNodes((currentNodes) => applyNodeChanges(changes, currentNodes)),
-    []
-  );
-
-  //handle edge changes
-  const onEdgeChange = useCallback(
-    (changes) =>
-      setEdges((currentEdges) => applyEdgeChanges(changes, currentEdges)),
-    []
-  );
 
   //handle manual node connection
   const onConnect = useCallback(
@@ -84,16 +83,19 @@ function App() {
         defaultEdgeOptions={{
           type: 'smoothstep',
           markerEnd: { type: 'arrow' },
-        }}
-        onPaneClick={(e) => {
-          console.log(e);
-          console.log(nodes, edges);
+          style: { stroke: '#3DA480' },
         }}
         fitView
+        onPaneClick={() => {
+          layout();
+        }}
+        onNodeMouseEnter={(e, n) => {
+          console.log(n);
+        }}
       >
         <Background color="#EFECEC" style={{ backgroundColor: '#191A1B' }} />
         <Controls />
-        <MiniMap />
+        <MiniMap nodeStrokeColor="#191A1B" />
       </ReactFlow>
     </div>
   );
