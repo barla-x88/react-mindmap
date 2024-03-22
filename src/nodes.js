@@ -5,4 +5,10 @@ export const nodes = [
     type: 'customNode',
     data: { input: '' },
   },
+  {
+    id: '2',
+    position: { x: 400, y: 350 },
+    type: 'customNode',
+    data: { input: '' },
+  },
 ];
