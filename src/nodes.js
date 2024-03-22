@@ -1,14 +1,44 @@
 export const nodes = [
   {
-    id: '1',
-    position: { x: 100, y: 200 },
+    id: 'process',
+    position: { x: 0, y: -250 },
     type: 'customNode',
-    data: { input: '' },
+    data: { input: 'process' },
   },
   {
-    id: '2',
-    position: { x: 400, y: 350 },
+    id: 'research',
+    position: { x: 0, y: 350 },
     type: 'customNode',
-    data: { input: '' },
+    data: { input: 'research' },
+  },
+  {
+    id: 'planning',
+    position: { x: 0, y: 450 },
+    type: 'customNode',
+    data: { input: 'planning' },
+  },
+  {
+    id: 'designing',
+    position: { x: 0, y: 550 },
+    type: 'customNode',
+    data: { input: 'designing' },
+  },
+  {
+    id: 'designing',
+    position: { x: 0, y: 550 },
+    type: 'customNode',
+    data: { input: 'designing' },
+  },
+  {
+    id: 'manufacturing',
+    position: { x: 0, y: 650 },
+    type: 'customNode',
+    data: { input: 'manufacturing' },
+  },
+  {
+    id: 'sales',
+    position: { x: 0, y: 750 },
+    type: 'customNode',
+    data: { input: 'sales/marketing' },
   },
 ];
