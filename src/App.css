@@ -42,13 +42,13 @@ input:focus {
 }
 
 .splash {
-  width: 35%;
-  height: 50%;
+  width: 400px;
+  height: 450px;
   background-color: #fdffff;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   gap: 3rem;
 }
@@ -61,7 +61,9 @@ input:focus {
 
 .splash p {
   text-transform: capitalize;
-  font-size: 1.8rem;
+  text-align: center;
+  height: 40px;
+  font-size: 1.6rem;
   color: #1f434d;
 }
 
