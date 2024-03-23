@@ -19,6 +19,7 @@ const CustomNode = ({ data }) => {
     <div style={{ ...defaultNodeStyle, backgroundColor: bgColor }}>
       <Handle type="target" position={Position.Left} />
       <input
+        name="color"
         type="color"
         value={bgColor}
         onChange={(e) => setBgColor(e.target.value)}
@@ -26,21 +27,21 @@ const CustomNode = ({ data }) => {
           position: 'absolute',
           top: '5%',
           right: '5%',
-          width: '20px',
-          height: '20px',
+          width: '15px',
+          height: '15px',
           border: 'none',
           padding: '0',
-          background: bgColor,
         }}
         title="Change Node Background"
       />
       <input
         style={{
           textAlign: 'center',
-          background: 'transparent',
+          backgroundColor: 'transparent',
           border: 'none',
           color: 'white',
           fontSize: '16px',
+          fontWeight: 'bold',
           textTransform: 'uppercase',
         }}
         type="text"
@@ -49,6 +50,7 @@ const CustomNode = ({ data }) => {
         value={input}
         placeholder="Click To Edit"
         title="Click To Edit Node Label"
+        name="label"
       />
       <Handle type="source" position={Position.Right} />
     </div>

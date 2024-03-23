@@ -86,12 +86,6 @@ function App() {
           style: { stroke: '#3DA480' },
         }}
         fitView
-        onPaneClick={() => {
-          layout();
-        }}
-        onNodeMouseEnter={(e, n) => {
-          console.log(n);
-        }}
       >
         <Background color="#EFECEC" style={{ backgroundColor: '#191A1B' }} />
         <Controls />
