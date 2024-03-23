@@ -15,7 +15,8 @@ import Dagre from '@dagrejs/dagre';
 import { nodes as initialNodes } from './nodes';
 import { edges as initialEdges } from './edges';
 
-import { useCallback, useEffect } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import ContextMenu from './ContextMenu';
 
 // Use custom Node
 const nodeTypes = { customNode: CustomNode };
@@ -49,6 +50,9 @@ function App() {
   const { fitView } = useReactFlow();
   const [nodes, setNodes, onNodeChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgeChange] = useEdgesState(initialEdges);
+  const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  const [menu, setMenu] = useState(null);
+  const ref = useRef(null);
 
   const layout = useCallback(() => {
     const layouted = getLayoutedElements(nodes, edges, {
@@ -71,9 +75,31 @@ function App() {
     [ReactFlow]
   );
 
+  const onContextmenu = useCallback(
+    (event) => {
+      event.preventDefault();
+      const pane = ref.current.getBoundingClientRect();
+      const flowPostion = reactFlowInstance.screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY,
+      });
+
+      const position = {
+        top: event.clientY < pane.height - 200 && event.clientY,
+        left: event.clientX < pane.width - 200 && event.clientX,
+        right: event.clientX >= pane.width - 200 && pane.width - event.clientX,
+        bottom:
+          event.clientY >= pane.height - 200 && pane.height - event.clientY,
+      };
+      setMenu({ position, flowPostion });
+    },
+    [reactFlowInstance]
+  );
+
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <ReactFlow
+        ref={ref}
         nodes={nodes}
         edges={edges}
         nodeTypes={nodeTypes}
@@ -86,7 +112,22 @@ function App() {
           style: { stroke: '#3DA480' },
         }}
         fitView
+        onPaneContextMenu={onContextmenu}
+        onPaneClick={() => {
+          setMenu(null);
+        }}
+        onInit={setReactFlowInstance}
       >
+        {menu && (
+          <ContextMenu
+            positions={menu.position}
+            flowPostion={menu.flowPositon}
+            autoLayout={layout}
+            removeContextMenu={() => {
+              setMenu(null);
+            }}
+          />
+        )}
         <Background color="#EFECEC" style={{ backgroundColor: '#191A1B' }} />
         <Controls />
         <MiniMap nodeStrokeColor="#191A1B" />

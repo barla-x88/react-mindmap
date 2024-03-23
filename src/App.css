@@ -18,3 +18,11 @@ body {
 input:focus {
   outline: none;
 }
+
+.context-menu button {
+  padding: 4px;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  background-color: #e79c25;
+}

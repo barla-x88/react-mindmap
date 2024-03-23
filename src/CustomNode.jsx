@@ -31,6 +31,7 @@ const CustomNode = ({ data }) => {
           height: '15px',
           border: 'none',
           padding: '0',
+          cursor: 'pointer',
         }}
         title="Change Node Background"
       />
