@@ -3,6 +3,7 @@ const ContextMenu = ({
   autoLayout,
   removeContextMenu,
   flowPosition,
+  addNode,
 }) => {
   return (
     <div
@@ -16,7 +17,15 @@ const ContextMenu = ({
         ...positions,
       }}
     >
-      <button>Add Node</button>
+      <button
+        onClick={() => {
+          addNode(flowPosition);
+          removeContextMenu();
+        }}
+        title="Add Node At mouse Position"
+      >
+        Add Node
+      </button>
 
       <button
         onClick={() => {

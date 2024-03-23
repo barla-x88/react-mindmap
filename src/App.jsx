@@ -17,6 +17,7 @@ import { edges as initialEdges } from './edges';
 
 import { useCallback, useRef, useState } from 'react';
 import ContextMenu from './ContextMenu';
+import { nanoid } from 'nanoid';
 
 // Use custom Node
 const nodeTypes = { customNode: CustomNode };
@@ -54,6 +55,7 @@ function App() {
   const [menu, setMenu] = useState(null);
   const ref = useRef(null);
 
+  //Auto Layout function
   const layout = useCallback(() => {
     const layouted = getLayoutedElements(nodes, edges, {
       direction: 'LR',
@@ -75,11 +77,13 @@ function App() {
     [ReactFlow]
   );
 
+  //display context menu
+  // https://reactflow.dev/examples/interaction/context-menu
   const onContextmenu = useCallback(
     (event) => {
       event.preventDefault();
       const pane = ref.current.getBoundingClientRect();
-      const flowPostion = reactFlowInstance.screenToFlowPosition({
+      const flowPosition = reactFlowInstance.screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
       });
@@ -91,7 +95,22 @@ function App() {
         bottom:
           event.clientY >= pane.height - 200 && pane.height - event.clientY,
       };
-      setMenu({ position, flowPostion });
+      setMenu({ position, flowPosition });
+    },
+    [reactFlowInstance]
+  );
+
+  // Add new nodes
+  const addNode = useCallback(
+    (position) => {
+      const newNode = {
+        id: nanoid(),
+        position: { x: position.x, y: position.y },
+        type: 'customNode',
+        data: { input: '', bg: '#009DF7' },
+      };
+
+      reactFlowInstance.addNodes(newNode);
     },
     [reactFlowInstance]
   );
@@ -108,8 +127,11 @@ function App() {
         onConnect={onConnect}
         defaultEdgeOptions={{
           type: 'smoothstep',
-          markerEnd: { type: 'arrow' },
+          markerEnd: { type: 'arrow', color: '#3DA480' },
           style: { stroke: '#3DA480' },
+        }}
+        onEdgeClick={(_, edge) => {
+          console.log(edge);
         }}
         fitView
         onPaneContextMenu={onContextmenu}
@@ -121,11 +143,12 @@ function App() {
         {menu && (
           <ContextMenu
             positions={menu.position}
-            flowPostion={menu.flowPositon}
+            flowPosition={menu.flowPosition}
             autoLayout={layout}
             removeContextMenu={() => {
               setMenu(null);
             }}
+            addNode={addNode}
           />
         )}
         <Background color="#EFECEC" style={{ backgroundColor: '#191A1B' }} />
