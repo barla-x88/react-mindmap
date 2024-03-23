@@ -4,7 +4,7 @@ import { Handle, Position } from 'reactflow';
 const defaultNodeStyle = {
   height: '50px',
   border: '1px solid #107372',
-  padding: '5px',
+  padding: '15px',
   borderRadius: '5px',
   display: 'flex',
   justifyContent: 'center',

@@ -11,6 +11,10 @@ html {
   padding: 0;
 }
 
+body {
+  overflow: hidden;
+}
+
 input:focus {
   outline: none;
 }

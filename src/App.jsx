@@ -53,7 +53,7 @@ function App() {
   const layout = useCallback(() => {
     const layouted = getLayoutedElements(nodes, edges, {
       direction: 'LR',
-      nodesep: 100,
+      nodesep: 50,
       ranksep: 200,
     });
 
