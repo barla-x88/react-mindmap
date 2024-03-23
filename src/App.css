@@ -26,3 +26,53 @@ input:focus {
   font-weight: bold;
   background-color: #e79c25;
 }
+
+.splash-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background-color: #1b1b1b36;
+  backdrop-filter: blur(10px);
+  z-index: 5;
+}
+
+.splash {
+  width: 35%;
+  height: 50%;
+  background-color: #fdffff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.splash img {
+  width: 300px;
+  height: 260px;
+  border-radius: 5px;
+}
+
+.splash p {
+  text-transform: capitalize;
+  font-size: 1.8rem;
+  color: #1f434d;
+}
+
+.splash button {
+  display: block;
+  border: none;
+  background-color: #e79c25;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+}

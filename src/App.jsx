@@ -18,6 +18,7 @@ import { edges as initialEdges } from './edges';
 import { useCallback, useRef, useState } from 'react';
 import ContextMenu from './ContextMenu';
 import { nanoid } from 'nanoid';
+import SplashScreen from './SplashScreen';
 
 // Use custom Node
 const nodeTypes = { customNode: CustomNode };
@@ -49,6 +50,7 @@ const getLayoutedElements = (nodes, edges, options) => {
 
 function App() {
   const { fitView } = useReactFlow();
+  const [showSplash, setShowSplash] = useState(true);
   const [nodes, setNodes, onNodeChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgeChange] = useEdgesState(initialEdges);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
@@ -116,7 +118,13 @@ function App() {
   );
 
   return (
-    <div style={{ width: '100vw', height: '100vh' }}>
+    <div
+      style={{
+        width: '100vw',
+        height: '100vh',
+      }}
+    >
+      {showSplash && <SplashScreen close={() => setShowSplash(false)} />}
       <ReactFlow
         ref={ref}
         nodes={nodes}
