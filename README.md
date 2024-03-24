@@ -2,6 +2,8 @@
 
 **Assignment solution for web development Internship**
 
+![ScreenShot](image.png)
+
 Live URL - https://create-mindmap.netlify.app/
 
 ## How to run
