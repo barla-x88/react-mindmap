@@ -1,6 +1,6 @@
 # React MindMap
 
-**Assignment solution for web development Internship**
+**Assignment solution for Frontend Internship**
 
 ![ScreenShot](image.png)
 
