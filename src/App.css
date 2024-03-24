@@ -78,3 +78,8 @@ input:focus {
   font-weight: bold;
   cursor: pointer;
 }
+
+.summary {
+  border-radius: 5px;
+  padding: 5px;
+}

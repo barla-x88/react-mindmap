@@ -19,6 +19,7 @@ import { useCallback, useRef, useState } from 'react';
 import ContextMenu from './ContextMenu';
 import { nanoid } from 'nanoid';
 import SplashScreen from './SplashScreen';
+import Summary from './Summary';
 
 // Use custom Node
 const nodeTypes = { customNode: CustomNode };
@@ -55,6 +56,9 @@ function App() {
   const [edges, setEdges, onEdgeChange] = useEdgesState(initialEdges);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [menu, setMenu] = useState(null);
+
+  const [showSummary, setShowSummary] = useState(null);
+
   const ref = useRef(null);
 
   //Auto Layout function
@@ -117,6 +121,17 @@ function App() {
     [reactFlowInstance]
   );
 
+  //display summary
+  const displaySummary = useCallback((event, node) => {
+    setShowSummary({
+      data: node.data.data,
+      position: {
+        top: `${event.clientY - 250}px`,
+        left: `${event.clientX}px`,
+      },
+    });
+  }, []);
+
   return (
     <div
       style={{
@@ -125,6 +140,9 @@ function App() {
       }}
     >
       {showSplash && <SplashScreen close={() => setShowSplash(false)} />}
+      {showSummary && (
+        <Summary data={showSummary.data} position={showSummary.position} />
+      )}
       <ReactFlow
         ref={ref}
         nodes={nodes}
@@ -147,6 +165,8 @@ function App() {
           setMenu(null);
         }}
         onInit={setReactFlowInstance}
+        onNodeMouseEnter={displaySummary}
+        onNodeMouseLeave={() => setShowSummary(null)}
       >
         {menu && (
           <ContextMenu
