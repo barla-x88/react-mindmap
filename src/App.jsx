@@ -166,8 +166,8 @@ function App() {
           setMenu(null);
         }}
         onInit={setReactFlowInstance}
-        onNodeMouseEnter={displaySummary}
-        onNodeMouseLeave={() => setShowSummary(null)}
+        // onNodeMouseEnter={displaySummary}
+        // onNodeMouseLeave={() => setShowSummary(null)}
       >
         {menu && (
           <ContextMenu
