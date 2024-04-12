@@ -1,8 +1,13 @@
 # React MindMap
 
-**Assignment solution for Frontend Internship**
+**Mind map application built with React flow**
 
 ![ScreenShot](image.png)
+
+## Features
+
+- Add Nodes
+- Customize node colors
 
 Live URL - https://create-mindmap.netlify.app/
 

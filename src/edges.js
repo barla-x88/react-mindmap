@@ -1,107 +1,35 @@
 export const edges = [
   {
-    id: 'process-research',
-    source: 'process',
-    target: 'research',
+    id: 'filmmaking-production',
+    source: 'filmmaking',
+    target: 'preProduction',
   },
+  // Pre-Production to Production
   {
-    id: 'process-planning',
-    source: 'process',
-    target: 'planning',
-  },
-  {
-    id: 'process-designing',
-    source: 'process',
-    target: 'designing',
-  },
-  {
-    id: 'process-manufacturing',
-    source: 'process',
-    target: 'manufacturing',
-  },
-  {
-    id: 'process-sales',
-    source: 'process',
-    target: 'sales',
-  },
-  {
-    id: 'research-external',
-    source: 'research',
-    target: 'external',
-  },
-  {
-    id: 'research-internal',
-    source: 'research',
-    target: 'internal',
-  },
-  {
-    id: 'planning-prd',
-    source: 'planning',
-    target: 'prd',
-  },
-  {
-    id: 'planning-specs',
-    source: 'planning',
-    target: 'specs',
-  },
-  {
-    id: 'designing-hardware',
-    source: 'designing',
-    target: 'hardware',
-  },
-  {
-    id: 'designing-software',
-    source: 'designing',
-    target: 'software',
-  },
-  {
-    id: 'manufacturing-material',
-    source: 'manufacturing',
-    target: 'material',
-  },
-  {
-    id: 'manufacturing-production',
-    source: 'manufacturing',
+    id: 'preProduction-production',
+    source: 'preProduction',
     target: 'production',
   },
+  // Pre-Production to Script
+  { id: 'preProduction-script', source: 'preProduction', target: 'script' },
+  // Pre-Production to Casting
+  { id: 'preProduction-casting', source: 'preProduction', target: 'casting' },
+  // Pre-Production to Budgeting
   {
-    id: 'sales-online',
-    source: 'sales',
-    target: 'online',
+    id: 'preProduction-budgeting',
+    source: 'preProduction',
+    target: 'budgeting',
   },
+  // Pre-Production to Genre
+  { id: 'preProduction-genre', source: 'preProduction', target: 'genre' },
+  // Production to Cinematography
   {
-    id: 'sales-dealership',
-    source: 'sales',
-    target: 'dealership',
+    id: 'production-cinematography',
+    source: 'production',
+    target: 'cinematography',
   },
-  {
-    id: 'external-B2C1',
-    source: 'external',
-    target: 'B2C1',
-  },
-  {
-    id: 'external-B2C2',
-    source: 'external',
-    target: 'B2C2',
-  },
-  {
-    id: 'B2C1-online_',
-    source: 'B2C1',
-    target: 'online_',
-  },
-  {
-    id: 'B2C1-interview',
-    source: 'B2C1',
-    target: 'interview',
-  },
-  {
-    id: 'B2C1-publicdata',
-    source: 'B2C1',
-    target: 'publicdata',
-  },
-  {
-    id: 'B2C1-health',
-    source: 'B2C1',
-    target: 'health',
-  },
+  // Production to Editing
+  { id: 'production-editing', source: 'production', target: 'editing' },
+  // Production to Sound Design
+  { id: 'production-soundDesign', source: 'production', target: 'soundDesign' },
 ];

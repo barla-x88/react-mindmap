@@ -123,6 +123,7 @@ function App() {
 
   //display summary
   const displaySummary = useCallback((event, node) => {
+    console.log(node.position);
     setShowSummary({
       data: node.data.data,
       position: {
